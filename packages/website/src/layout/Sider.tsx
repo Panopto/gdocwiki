@@ -453,32 +453,7 @@ function Sider_({ isExpanded = true }: { isExpanded?: boolean }) {
             )}
           </>
         )}
-        {/* > 1 because of My Drive */}
-        {drives.length > 1 && (
-          <AccordionItem key="drives" title="Shared Drives">
-            <TreeView
-              label="Shared Drives"
-              hideLabel={true}
-              selected={selected}
-              active={driveId}
-              id={'tree-drives'}
-              size="compact"
-            >
-              {drives.map((drive) => (
-                <TreeNode
-                  key={drive.id}
-                  id={drive.id}
-                  isExpanded={false}
-                  label={drive.name}
-                  onSelect={() => {
-                    dispatch(setDrive(drive));
-                    history.push(`/view/${drive.id}`);
-                  }}
-                />
-              ))}
-            </TreeView>
-          </AccordionItem>
-        )}
+        {/* Panopto specific change: Do not show "Shared Drives" in the side bar. */}
         {loading && <InlineLoading description="Loading Drive..." />}
         {!loading && !error && id && rootId && (
           <AccordionItem

@@ -25,8 +25,9 @@ export interface DocState {
   externalLinks: { [fileId: string]: ExternalLink };
 }
 
+// Panopto specific change to show GDoc as Edit mode.
 let mimeTypePreferredDisplay: MimeTypePreferredDisplay = {};
-mimeTypePreferredDisplay[MimeTypes.GoogleDocument] = 'view';
+mimeTypePreferredDisplay[MimeTypes.GoogleDocument] = 'edit';
 mimeTypePreferredDisplay[MimeTypes.GoogleSpreadsheet] = 'preview';
 
 const initialStateDoc: DocState = {
