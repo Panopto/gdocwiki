@@ -24,15 +24,18 @@ export function useSearch(fieldName: string, queryBuilder: (value: string) => st
     async function doSearch(checkpoint: number) {
       setLoading(true);
       const fileList: DriveFile[] = [];
+
+      // Panopto specific change to limit the search targets only the root drive.
       try {
         let pageToken = '';
         for (let i = 0; i < 10; i++) {
           const resp = await gapi.client.drive.files.list({
             pageToken,
-            corpora: 'allDrives ',
+            corpora: 'drive',
             includeItemsFromAllDrives: true,
             supportsAllDrives: true,
-            pageSize: 500,
+            driveId: getConfig().REACT_APP_ROOT_ID,
+            pageSize: 100,
             q: queryBuilderMemo(fieldValue),
             fields: getConfig().DEFAULT_FILE_FIELDS,
           });
