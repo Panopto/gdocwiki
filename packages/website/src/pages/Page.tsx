@@ -93,7 +93,7 @@ function PageId(props: PageProps & { id: string }) {
             {fullScreenMode(file) ? (
               <Stack horizontal>
                 <StackItem key="fileaction" grow={1}>
-                  <FileAction file={file} key={file.id} allOverflow={true} />
+                  <FileAction file={file} key={file.id} allOverflow={false} />
                 </StackItem>
                 <StackItem key="breadcrumb" grow={11} styles={{ root: { fontSize: '16px' }}}>
                   <FileBreadcrumb file={file} />

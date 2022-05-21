@@ -155,37 +155,6 @@ function FileAction(props: { file: DriveFile, allOverflow?: boolean }) {
           },
         });
       }
-
-      // For non-folder, show modify date, and how to open it.
-      commands.push({
-        key: 'modify_user',
-        onClick: () => {
-          toggleRevisions();
-        },
-        text: (
-          <Stack
-            verticalAlign="center"
-            horizontal
-            tokens={{ childrenGap: 8 }}
-            className={styles.note}
-          >
-            <Avatar
-              name={file.lastModifyingUser?.displayName}
-              src={file.lastModifyingUser?.photoLink}
-              size="20"
-              round
-            />
-            <span className={responsiveStyle.hideInPhone}>
-              {file.lastModifyingUser?.displayName}
-              {' edited '}
-              {dayjs(file.modifiedTime).fromNow()}
-            </span>
-            <span className={responsiveStyle.showInPhone}>
-              {file.lastModifyingUser?.displayName}
-            </span>
-          </Stack>
-        ) as any,
-      });
     } else {
       // Open folder command
       const folderValid =
@@ -362,16 +331,19 @@ function FileAction(props: { file: DriveFile, allOverflow?: boolean }) {
             </Pivot>
           </Stack.Item>
         )}
-        <Stack.Item disableShrink grow={1} style={{ paddingLeft: '1em' }}>
+        <Stack.Item disableShrink style={{ paddingLeft: '1em' }}>
           {file.mimeType === MimeTypes.GoogleFolder ? (
-            <CommandBar items={commandBarItems.concat(commandBarOverflowItems)} />
+            <CommandBar
+              items={commandBarItems.concat(commandBarOverflowItems)} />
           ) : props.allOverflow ? (
             <CommandBar
               items={[]}
               overflowItems={commandBarItems.concat(commandBarOverflowItems)}
             />
           ) : (
-            <CommandBar items={commandBarItems} overflowItems={commandBarOverflowItems} />
+            <CommandBar
+              items={commandBarItems}
+              overflowItems={commandBarOverflowItems} />
           )}
         </Stack.Item>
         {docMode !== 'view' && (
